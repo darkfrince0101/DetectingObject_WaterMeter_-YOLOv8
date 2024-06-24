@@ -1,0 +1,70 @@
+.container {
+    display: flex; 
+    width: 90%;             
+    margin: auto;           
+    padding: 10px;  
+    gap: 20px;           
+}
+
+.div1{
+    padding: 20px;
+    flex-grow: 1;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+}
+
+.div2{
+    flex-shrink: 0; 
+    flex-grow: 0;   
+    flex-basis: auto;
+}
+.div1, .div2 {
+    width: 50%;                      
+    box-sizing: border-box; 
+}
+.div1 .image{
+    width: 100%;            
+    height: auto;           
+    display: block;    
+    overflow: hidden;     
+}
+.div1 .image img{
+    width: 100%;            
+    height: auto;           
+    display: block; 
+}
+
+.form-control {
+    width: 100%; 
+}
+
+.process{
+    margin-bottom: 1rem;
+    padding: 20px;           
+    box-sizing: border-box; 
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+}
+
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.disappear{
+    animation: vanish 1s forwards;
+}
+
+@keyframes vanish {
+    100%{
+        opacity: 0;
+        visibility: hidden;
+    }
+}

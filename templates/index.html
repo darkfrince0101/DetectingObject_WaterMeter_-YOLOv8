@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YOLOv8 OBJECT DETECTION</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:100,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <script></script>
+  </head>
+  <body>
+    <div class="loader" id="loader">
+      <img src="../static/load-gif.gif" alt="" />
+    </div>
+    <div class="container">
+      <div class="div1">
+        <div>
+          <h3>YOLOv8 Detection</h3>
+        </div>
+        <!-- Display the upload image -->
+        <div class="image">
+          {% if filename %}
+          <img
+            src="{{ url_for('uploaded_file', filename=filename) }}"
+            alt="Uploaded Image"
+            style="max-width: 100%"
+          />
+          {% else %}
+          <p>No image uploaded yet.</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="div2">
+        <form
+          id="uploadForm"
+          action="{{ url_for('upload_file') }}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group process">
+            <label for="formFile" class="form-label"
+              ><strong>Upload Image</strong></label
+            >
+            <div class="d-flex align-items-center">
+              <input
+                class="form-control mr-2"
+                type="file"
+                id="formFile"
+                accept="image/*"
+                name="image"
+              />
+              <button type="submit" class="btn btn-primary" id="uploadButton">
+                Detect
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="process">
+          <h6><strong>Water Meter</strong></h6>
+          <!-- Display the crop image -->
+          <div class="image crop_img">
+            {% if crop_filename %}
+            <img
+              src="{{ url_for('cropped_file', filename=crop_filename) }}"
+              alt="Cropped Image"
+              style="max-width: 100%"
+            />
+            {% else %} {% if error_message is defined and error_message %}
+            <p class="alert alert-danger">{{ error_message }}</p>
+            {% else %}
+            <p>No crop meter detected yet.</p>
+            {% endif %} {% endif %}
+          </div>
+        </div>
+        <div class="process">
+          <!-- Display the labeled number image -->
+          <div class="image number_img pb-3">
+            {% if number_filename %}
+            <img
+              src="{{ url_for('numbered_file', filename=number_filename) }}"
+              alt="Numbered Image"
+              style="max-width: 100%"
+            />
+            {% endif %}
+          </div>
+          <h6><strong>Number Detect</strong></h6>
+          <!-- Display the meter reading result -->
+          {% if meter_result %}
+          <h2><strong>{{ meter_result }}</strong></h2>
+          {% else %}
+          <p>No number reading detected yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <script src="../static/app.js" charset="utf-8"></script>
+  </body>
+</html>
